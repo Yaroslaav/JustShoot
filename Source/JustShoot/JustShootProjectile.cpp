@@ -29,6 +29,8 @@ AJustShootProjectile::AJustShootProjectile()
 
 	// Die after 3 seconds by default
 	InitialLifeSpan = 3.0f;
+	
+	
 }
 
 void AJustShootProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -40,7 +42,8 @@ void AJustShootProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 		{
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 		}
-
+		OnHitDelegate.Broadcast(HitComp, OtherActor, OtherComp, NormalImpulse, Hit);
+		
 		Destroy();
 	}
 }

@@ -13,6 +13,10 @@ class JUSTSHOOT_API UTP_WeaponComponent : public USkeletalMeshComponent
 {
 	GENERATED_BODY()
 
+	UDELEGATE(BlueprintAuthorityOnly)
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSpawnProjectile, AActor*, SpawnedActor);
+
+
 public:
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
@@ -37,6 +41,9 @@ public:
 	/** Fire Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* FireAction;
+
+	UPROPERTY(BlueprintAssignable, Category = "OnSpawnProjectileDelegate")
+	FOnSpawnProjectile OnSpawnProjectile;
 
 	/** Sets default values for this component's properties */
 	UTP_WeaponComponent();
